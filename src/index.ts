@@ -1,9 +1,16 @@
+import express from 'express';
+import {promises as fsPromises} from "fs"
 
+const app = express();
 
-function PrintIt(a: number) {
-  console.log(a);
-}
+const Port = 8000;
 
-PrintIt(5);
+app.get('/image', (req, res) => {
+  res.send("it's working!");
+});
 
-export default PrintIt;
+app.listen(Port, () => {
+  console.log(`app is now running on localhost:${Port}`);
+});
+
+export default app;

@@ -1,5 +1,14 @@
-import PrintIt from "..";
+import app from "..";
+import supertest from "supertest";
 
-it('expect the value to be string', () => {
-    expect(PrintIt(5)).toBe(5)
+const request = supertest(app);
+
+
+describe("tests for the endpoint", () => {
+    it("should return OK status", async () => {
+        const response = await request.get("/image");
+        expect(response.status).toBe(200);
+    })
 })
+
+
