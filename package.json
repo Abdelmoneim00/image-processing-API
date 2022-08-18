@@ -59,6 +59,7 @@
     "find-up": "^5.0.0",
     "flat-cache": "^3.0.4",
     "flatted": "^3.2.6",
+    "fs": "^0.0.1-security",
     "fs.realpath": "^1.0.0",
     "functional-red-black-tree": "^1.0.1",
     "glob": "^7.2.3",

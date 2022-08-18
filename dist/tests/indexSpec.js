@@ -14,10 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const __1 = __importDefault(require(".."));
 const supertest_1 = __importDefault(require("supertest"));
+const fs_1 = __importDefault(require("fs"));
 const request = (0, supertest_1.default)(__1.default);
 describe("tests for the endpoint", () => {
     it("should return OK status", () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.get("/image");
         expect(response.status).toBe(200);
     }));
+    it("should check if the image is in the file", () => {
+        const path = `${__dirname}/Nasa.jpg`;
+        expect(fs_1.default.existsSync(path)).toBe(true);
+    });
 });

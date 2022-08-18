@@ -12,4 +12,6 @@ app.get('/image', (req, res) => {
 app.listen(Port, () => {
     console.log(`app is now running on localhost:${Port}`);
 });
+const path = `${__dirname}/../Nasa.jpg`;
+console.log(path);
 exports.default = app;

@@ -1,5 +1,5 @@
 import express from 'express';
-import {promises as fsPromises} from "fs"
+import fs from "fs"
 
 const app = express();
 
@@ -12,5 +12,16 @@ app.get('/image', (req, res) => {
 app.listen(Port, () => {
   console.log(`app is now running on localhost:${Port}`);
 });
+
+const path = `E:/image processing API/src/tests/Nasa.jpg`;
+
+if(fs.existsSync(path)) {
+  console.log(true)
+}else {
+  console.log(false)
+}
+
+console.log(path)
+
 
 export default app;
