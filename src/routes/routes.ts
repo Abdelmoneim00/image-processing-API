@@ -10,9 +10,7 @@ routes.get('/', (req, res) => {
     if (err) throw err;
     res.writeHead(200, {'Content-Type': 'image/jpeg'});
     res.end(data);
-  })
+  });
 });
-
-
 
 export default routes;

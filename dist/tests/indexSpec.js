@@ -16,12 +16,13 @@ const __1 = __importDefault(require(".."));
 const supertest_1 = __importDefault(require("supertest"));
 const fs_1 = __importDefault(require("fs"));
 const request = (0, supertest_1.default)(__1.default);
-describe('tests for the endpoint', () => {
-    it('should return OK status', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/image');
+describe("tests for the endpoint", () => {
+    it("should return OK status", () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get("/image");
         expect(response.status).toBe(200);
-    }));
-    it('check if the isintial image exists'), () => {
-        expect(fs_1.default.existsSync(`${process.cwd()}\\src\\Nasa.jpg`)).toBe(true);
+    })),
+        xit('check if the isintial image exists'), () => {
+        const file = fs_1.default.existsSync(`${process.cwd()}\\src\\Nasa.jpg`);
+        expect(file).toBe(true);
     };
 });
