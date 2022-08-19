@@ -4,14 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const routes_1 = __importDefault(require("./routes/routes"));
 const app = (0, express_1.default)();
 const Port = 8000;
-app.get('/image', (req, res) => {
-    res.send("it's working!");
-});
+app.use('/image', routes_1.default);
+app.get;
 app.listen(Port, () => {
     console.log(`app is now running on localhost:${Port}`);
 });
-const path = `${__dirname}/../Nasa.jpg`;
-console.log(path);
 exports.default = app;
