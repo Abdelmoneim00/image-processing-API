@@ -1,35 +1,25 @@
 import fs from 'fs';
 import express from 'express';
-import { cwd } from 'process';
+import path from 'path';
+import middleware from '../middleware/middleware';
 
-fs.open(`${cwd()}\\src\\item.txt`, 'r', (err, data) => {
-  if (err) throw err;
-  console.log(data);
-});
-
-fs.readFile(`${cwd()}\\src\\item.txt`, 'utf-8', (err, data) => {
-  console.log(data);
-});
-
-fs.rename(`${cwd()}\\src\\item.txt`, `${cwd()}\\src\\hello.txt`, (err) => {
-  console.log(err);
-});
-
-fs.close(3, (err) => {
-  if (err) {
-    console.log('failed');
-  } else {
-    console.log('done');
-  }
-});
+let paths: { firstPath: string; secondPath: string } = {
+  firstPath: path.resolve('./', 'Nasa.jpg'),
+  secondPath: path.resolve('./', 'resized-image'),
+};
 
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
-  fs.readFile(`${cwd()}\\src\\Nasa.jpg`, (err, data) => {
+  res.send(
+    'welcome to my Project! \n please navigate to /image route to start testing the app :)'
+  );
+});
+
+routes.get('/image',middleware, (req, res) => {
+  fs.readFile(`${paths.firstPath}`, (err, data) => {
     if (err) throw err;
-    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-    res.end(data);
+    res.sendFile(paths.firstPath);
   });
 });
 

@@ -6,7 +6,7 @@ const app = express();
 
 const Port: number = 8000;
 
-app.use('/image', routes);
+app.use('/', routes);
 
 app.get;
 
