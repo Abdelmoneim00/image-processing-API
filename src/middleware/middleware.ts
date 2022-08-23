@@ -5,13 +5,13 @@ const middleware = (
   res: express.Response,
   next: Function
 ): void => {
-  let file = req.query.file;
-  let wid = req.query.wid;
-  let hei = req.query.hei;
+  let file: string = req.query.file as string;
+  let wid = req.query.wid as string;
+  let hei = req.query.hei as string;
   if (
     typeof file !== 'string' ||
-    typeof wid !== 'string' ||
-    typeof hei !== 'string'
+    typeof +wid !== 'number' ||
+    typeof +hei !== 'number'
   ) {
     res.send('it seems you used wrong numbers or query');
   }

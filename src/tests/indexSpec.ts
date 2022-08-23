@@ -23,7 +23,7 @@ describe('tests for sharp and images', () => {
     expect(isIT('Nasa.jpg' as string)).toBe(true as boolean);
   }),
     it('should check if sharp is working', async () => {
-      const name : string = 'Nasa';
+      const name: string = 'Nasa';
       await reSize(name as string, 500 as number, 400 as number);
       expect(isIT('Nasa_500_400.jpg' as string)).toBe(true as boolean);
     });

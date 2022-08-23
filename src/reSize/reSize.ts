@@ -2,11 +2,13 @@ import sharp from 'sharp';
 import path from 'path';
 
 async function reSize(name: string, wid: number, hei: number) {
+  let firstPath: string = path.resolve('./', `${name}.jpg`);
   try {
-    const firstPath = path.resolve('./', `${name}.jpg`);
-    await sharp(firstPath).resize(wid, hei).toFile(`${name}_${wid}_${hei}.jpg`);
-  } catch (err) {
-    console.error(err);
+    await sharp(firstPath)
+      .resize(wid as number, hei as number)
+      .toFile(`${name}_${wid}_${hei}.jpg`);
+  } catch {
+    return false
   }
 }
 
