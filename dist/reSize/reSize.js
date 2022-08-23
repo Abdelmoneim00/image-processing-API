@@ -12,24 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const reSize_1 = __importDefault(require("../reSize/reSize"));
-const express_1 = __importDefault(require("express"));
+const sharp_1 = __importDefault(require("sharp"));
 const path_1 = __importDefault(require("path"));
-const middleware_1 = __importDefault(require("../middleware/middleware"));
-const routes = express_1.default.Router();
-routes.get('/', (req, res) => {
-    res.send('welcome to my Project! \n please navigate to /image route to start testing the app :)');
-});
-routes.get('/image', middleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let Name = req.query.file;
-    let wid = req.query.wid;
-    let hei = req.query.hei;
-    yield (0, reSize_1.default)(Name, +wid, +hei);
-    try {
-        res.sendFile(path_1.default.resolve('./', `${Name}_${wid}_${hei}.jpg`));
-    }
-    catch (_a) {
-        res.send('no such file');
-    }
-}));
-exports.default = routes;
+function reSize(name, wid, hei) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const firstPath = path_1.default.resolve('./', `Nasa.jpg`);
+            yield (0, sharp_1.default)(firstPath).resize(wid, hei).toFile(`${name}_${wid}_${hei}.jpg`);
+        }
+        catch (err) {
+            console.error(err);
+        }
+    });
+}
+exports.default = reSize;
