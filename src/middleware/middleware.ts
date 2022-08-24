@@ -15,7 +15,7 @@ const middleware = (
   ) {
     console.log('not valid data has been sent in the query');
   }
-  next();
+  next() as Function;
 };
 
 export default middleware;

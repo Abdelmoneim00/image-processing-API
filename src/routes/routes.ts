@@ -33,7 +33,7 @@ routes.get(
         await reSize(Name as string, +wid as number, +hei as number);
         res.sendFile(secondPath);
       }
-    } catch (err) {
+    } catch (err : unknown) {
       res.send(err);
     }
   }

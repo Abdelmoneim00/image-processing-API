@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
 
-async function reSize(name: string, wid: number, hei: number) {
+async function reSize(name: string, wid: number, hei: number) : Promise < false | undefined> {
   let firstPath: string = path.resolve('./', `${name}.jpg`);
   try {
     await sharp(firstPath)

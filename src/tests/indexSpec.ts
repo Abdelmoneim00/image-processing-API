@@ -3,7 +3,6 @@ import supertest from 'supertest';
 import fs from 'fs';
 import path from 'path';
 import reSize from '../reSize/reSize';
-import { check, checkName } from '../checkFunc/checkFunc';
 
 function isIT(image: string): boolean {
   return fs.existsSync(path.resolve('./', `${image}`)) ? true : false;
@@ -11,7 +10,7 @@ function isIT(image: string): boolean {
 
 const request = supertest(app);
 
-describe('tests for the endpoint', () => {
+describe('tests for the endpoint', () : void => {
   it('should return OK status', async (): Promise<void> => {
     const response = await request.get('/');
     expect(response.status).toBe(200);
@@ -32,10 +31,10 @@ describe('tests for the endpoint', () => {
 });
 
 describe('tests for sharp and images', () => {
-  it('should check if the initial image exists', () => {
+  it('should check if the initial image exists', () : void => {
     expect(isIT('Nasa.jpg' as string)).toBe(true as boolean);
   }),
-    it('should check if sharp is working', async () => {
+    it('should check if sharp is working', async () : Promise<void> => {
       const name: string = 'Nasa';
       await reSize(name as string, 500 as number, 400 as number);
       expect(isIT('Nasa_500_400.jpg' as string)).toBe(true as boolean);
