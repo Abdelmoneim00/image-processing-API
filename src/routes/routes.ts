@@ -1,23 +1,14 @@
 import reSize from '../reSize/reSize';
-import express, { response } from 'express';
+import express, { response, Router } from 'express';
 import path from 'path';
 import middleware from '../middleware/middleware';
 import { Request, Response } from 'express';
 import fs from 'fs';
+import { check, checkName } from '../checkFunc/checkFunc';
 
-const routes = express.Router();
+const routes: Router = express.Router();
 
-function check(first: unknown, second: unknown, third: unknown) {
-  if (
-    typeof first !== 'string' ||
-    typeof second !== 'string' ||
-    typeof third !== 'string'
-  ) {
-    response.send("it seems you didn't log a valid number or file name :(");
-  }
-}
-
-routes.get('/', (req: Request, res: Response) => {
+routes.get('/', (req: Request, res: Response): void => {
   res.send(
     'welcome to my Project! \n please navigate to /image route to start testing the app :)'
   );
@@ -30,26 +21,20 @@ routes.get(
     let Name = req.query.file as unknown;
     let wid = req.query.wid as string;
     let hei = req.query.hei as string;
-    if (
-      fs.existsSync(path.resolve('./', `${Name}_${wid}_${hei}.jpg`)) === true
-    ) {
-      res.sendFile(path.resolve('./', `${Name}_${wid}_${hei}.jpg`));
-    } else if(
-      typeof Name !== 'string' ||
-      typeof +wid !== 'number' ||
-      typeof +hei !== 'number'
-    ) {res.send("it seems you didn't log a valid number or file name :(")} else {
-      try {
+    let secondPath: string = path.resolve('./', `${Name}_${wid}_${hei}.jpg`);
+    try {
+      if (check(Name as string, wid as string, hei as string) === false) {
+        res.send('wrong data has been given from query');
+      } else if (checkName(Name as string) === false) {
+        res.send(`no such file with the name ${Name}`);
+      } else if (fs.existsSync(secondPath) === true) {
+        res.sendFile(secondPath);
+      } else if (fs.existsSync(secondPath) === false) {
         await reSize(Name as string, +wid as number, +hei as number);
-        if(fs.existsSync(path.resolve('./', `${Name}_${wid}_${hei}.jpg`)) ===true) {
-          res.sendFile(path.resolve('./', `${Name}_${wid}_${hei}.jpg`))
-        }
-        else {
-          res.send(`it seems like you\'ve added wrong query or name`);
-        }
-      } catch {
-        res.send("it seems you didn't log a valid number or file name :(");
+        res.sendFile(secondPath);
       }
+    } catch (err) {
+      res.send(err);
     }
   }
 );

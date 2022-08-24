@@ -5,10 +5,10 @@ async function reSize(name: string, wid: number, hei: number) {
   let firstPath: string = path.resolve('./', `${name}.jpg`);
   try {
     await sharp(firstPath)
-      .resize(wid as number, hei as number)
+      .resize(+wid as number, +hei as number)
       .toFile(`${name}_${wid}_${hei}.jpg`);
   } catch {
-    return false
+    return false;
   }
 }
 

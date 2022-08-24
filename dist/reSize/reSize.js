@@ -16,12 +16,14 @@ const sharp_1 = __importDefault(require("sharp"));
 const path_1 = __importDefault(require("path"));
 function reSize(name, wid, hei) {
     return __awaiter(this, void 0, void 0, function* () {
+        let firstPath = path_1.default.resolve('./', `${name}.jpg`);
         try {
-            const firstPath = path_1.default.resolve('./', `Nasa.jpg`);
-            yield (0, sharp_1.default)(firstPath).resize(wid, hei).toFile(`${name}_${wid}_${hei}.jpg`);
+            yield (0, sharp_1.default)(firstPath)
+                .resize(+wid, +hei)
+                .toFile(`${name}_${wid}_${hei}.jpg`);
         }
-        catch (err) {
-            console.error(err);
+        catch (_a) {
+            return false;
         }
     });
 }

@@ -5,9 +5,9 @@ const middleware = (req, res, next) => {
     let wid = req.query.wid;
     let hei = req.query.hei;
     if (typeof file !== 'string' ||
-        typeof wid !== 'string' ||
-        typeof hei !== 'string') {
-        res.send('it seems you used wrong numbers or query');
+        typeof +wid !== 'number' ||
+        typeof +hei !== 'number') {
+        console.log('not valid data has been sent in the query');
     }
     next();
 };

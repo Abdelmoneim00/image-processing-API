@@ -13,7 +13,7 @@ const middleware = (
     typeof +wid !== 'number' ||
     typeof +hei !== 'number'
   ) {
-    res.send('it seems you used wrong numbers or query');
+    console.log('not valid data has been sent in the query');
   }
   next();
 };

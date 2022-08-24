@@ -23,11 +23,33 @@ function isIT(image) {
 const request = (0, supertest_1.default)(__1.default);
 describe('tests for the endpoint', () => {
     it('should return OK status', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/image');
+        const response = yield request.get('/');
         expect(response.status).toBe(200);
-    }));
+    })),
+        it('should return an ok status for the /image route with not valid data without query', () => __awaiter(void 0, void 0, void 0, function* () {
+            const response2 = yield request.get('/image');
+            expect(response2.status).toBe(200);
+        })),
+        it('should return OK status when passing right file name and numbers', () => __awaiter(void 0, void 0, void 0, function* () {
+            let name = 'Nasa';
+            let height = 450;
+            let width = 600;
+            const response3 = request.get(`/image?file=${name}&wid=${width}&hei=${height}`);
+            let image = fs_1.default.existsSync(path_1.default.resolve('./', `${name}`));
+            yield response3;
+            expect(image).toBeTruthy;
+        })),
+        it('should check if the url won\'t work when passing wrong file name', () => __awaiter(void 0, void 0, void 0, function* () {
+            let name = 'Egypt';
+            let height = 450;
+            let width = 600;
+            let image = fs_1.default.existsSync(path_1.default.resolve('./', `${name}`));
+            const response4 = request.get(`/image?file=${name}&wid=${width}&hei=${height}`);
+            yield response4;
+            expect(image).toBeFalse;
+        }));
 });
-describe('tests for sharp and iamges', () => {
+describe('tests for sharp and images', () => {
     it('should check if the initial image exists', () => {
         expect(isIT('Nasa.jpg')).toBe(true);
     }),
